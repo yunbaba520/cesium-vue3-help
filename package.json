@@ -1,0 +1,22 @@
+{
+  "name": "cesium-vue3-help",
+  "version": "1.0.2",
+  "description": "一个基于cesium、vue3的js工具库",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "cesium",
+    "vue3",
+    "vue",
+    "util"
+  ],
+  "author": "coderzyl",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "homepage": ""
+}
