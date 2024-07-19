@@ -1,6 +1,6 @@
 {
   "name": "cesium-vue3-help",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "一个基于cesium、vue3的js工具库",
   "main": "index.js",
   "scripts": {
