@@ -6,6 +6,7 @@
 - v1.0.1: 2024-07-19：修复 bug
 - v1.0.2: 2024-07-19：修改文档
 - v1.0.3: 2024-07-19：添加 github
+- v1.1.0: 2025-01-21：添加漫游
 
 # 功能列表
 
@@ -41,4 +42,76 @@ function addDialog() {
     viewer
   )
 }
+```
+
+### 2.漫游
+
+- markss：点集（经纬度，高度）
+- pitchValue：俯仰角度
+- callBack: 到达一个点后的回调函数
+
+使用案例
+
+```
+<script setup>
+onMounted(() => {
+  initRoam()
+})
+onBeforeUnmount(() => {
+  if (!_cesiumUtilRoam) {
+    if (viewer) {
+      setTimeout(() => {
+        _cesiumUtilRoam.exitFly()
+        clearTimeout(timer.value)
+      }, 1000)
+    }
+  } else {
+    if (viewer) {
+      _cesiumUtilRoam.exitFly()
+    }
+  }
+  clearTimeout(timer.value)
+})
+const { proxy } = getCurrentInstance()
+
+// 定时器
+const timer = ref(null)
+let _cesiumUtilRoam = null
+
+function changeManyou() {
+  isFly.value = !isFly.value
+  if (isFly.value) {
+    console.log('打开漫游')
+    flyContinue()
+  } else {
+    console.log('关闭漫游')
+    flyStop()
+  }
+}
+
+function initRoam() {
+  _cesiumUtilRoam = new CesiumUtilRoam(markss, pitchValue, callBack)
+  flyStart()
+  flyStop()
+}
+function callBack(deviceIds) {
+  return new Promise((resolve, reject) => {
+    resolve()
+  })
+}
+function flyStart() {
+  if (_cesiumUtilRoam) _cesiumUtilRoam.startFly()
+}
+function flyStop() {
+  isFly.value = false
+  clearTimeout(timer.value)
+  if (_cesiumUtilRoam) _cesiumUtilRoam.stopFly()
+}
+function flyContinue() {
+  isFly.value = true
+  if (_cesiumUtilRoam) _cesiumUtilRoam.continueFly()
+}
+</script>
+
+
 ```
